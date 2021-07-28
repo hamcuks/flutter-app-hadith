@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hadith_app/iconsax_icons.dart';
+import 'package:flutter_hadith_app/pages/widgets/card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,12 +12,15 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Header(),
+            _Header(),
             Flexible(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                 child: ListView.builder(
-                  itemBuilder: (BuildContext context, index) => CardHadith(),
+                  itemBuilder: (BuildContext context, index) => CardHadith(
+                    namaHadith: "H.R. Malik",
+                    jumlahData: 5888,
+                  ),
                   itemCount: 9,
                 ),
               ),
@@ -28,8 +32,8 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class Header extends StatelessWidget {
-  const Header({
+class _Header extends StatelessWidget {
+  const _Header({
     Key? key,
   }) : super(key: key);
 
@@ -56,49 +60,6 @@ class Header extends StatelessWidget {
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class CardHadith extends StatelessWidget {
-  const CardHadith({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 200,
-      margin: EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(
-            Iconsax.book,
-            size: 40,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            "HR. Malik",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            "Dengan Jumlah 1587 Hadith",
-            style: TextStyle(fontSize: 16),
           )
         ],
       ),
