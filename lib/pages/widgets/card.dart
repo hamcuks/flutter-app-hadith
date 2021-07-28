@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hadith_app/iconsax_icons.dart';
+import 'package:flutter_hadith_app/model/hadith_model.dart';
 import 'package:flutter_hadith_app/pages/detail_hadith_page.dart';
 
 class CardHadith extends StatelessWidget {
-  const CardHadith(
-      {Key? key, required this.namaHadith, required this.jumlahData})
-      : super(key: key);
+  const CardHadith({Key? key, this.data}) : super(key: key);
 
-  final String namaHadith;
-  final int jumlahData;
+  final HadithModel? data;
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +36,14 @@ class CardHadith extends StatelessWidget {
               height: 20,
             ),
             Text(
-              namaHadith,
+              data!.name!,
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 10,
             ),
             Text(
-              "Dengan Jumlah ${jumlahData} Hadith",
+              "Dengan Jumlah ${data!.available!} Hadith",
               style: TextStyle(fontSize: 16),
             )
           ],
