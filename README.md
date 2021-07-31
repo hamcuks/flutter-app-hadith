@@ -23,11 +23,10 @@ Rest API: https://api.hadith.sutanlab.id/books/
 ### Todos
 
 - [x] Home & Detail Page
-- [] Control Page (Next/Previous)
-- [] Search Hadith by Number
-- [] Dark Mode
+- [ ] Control Page (Next/Previous)
+- [ ] Search Hadith by Number
+- [ ] Dark Mode
 
 ### Screenshoot
 
-<img src="ss/home.jpeg" width="200"/>
-<img src="ss/detail.jpeg" width="200"/>
+<img src="ss/home.jpeg" width="200"/> <img src="ss/detail.jpeg" width="200"/>
