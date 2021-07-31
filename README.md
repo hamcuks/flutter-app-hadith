@@ -22,10 +22,10 @@ Rest API: https://api.hadith.sutanlab.id/books/
 
 ### Todos
 
-<input type="checkbox" checked>Home & Detail Page</input> <br>
-<input type="checkbox">Control Page (Next/Previous)</input> <br>
-<input type="checkbox">Search Hadith by Number</input> <br>
-<input type="checkbox">Dark Mode</input> <br>
+- [x] Home & Detail Page
+- [] Control Page (Next/Previous)
+- [] Search Hadith by Number
+- [] Dark Mode
 
 ### Screenshoot
 
