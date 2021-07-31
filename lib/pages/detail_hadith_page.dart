@@ -5,7 +5,7 @@ import 'package:flutter_hadith_app/pages/widgets/controlButton.dart';
 import 'package:flutter_hadith_app/provider/provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final pageProvider = Provider<int>((_) => 1);
+final pageProvider = StateProvider<int>((_) => 1);
 
 class DetailHadithPage extends ConsumerWidget {
   const DetailHadithPage({
@@ -19,12 +19,12 @@ class DetailHadithPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, watch) {
+    final page = watch(pageProvider);
     final detailHadith = watch(
       detailHadithData(
-        DetailHadithParams(hadithId: hadithId, page: pageNum),
+        DetailHadithParams(hadithId: hadithId, page: page.state),
       ),
     );
-    final page = watch(pageProvider);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -39,7 +39,7 @@ class DetailHadithPage extends ConsumerWidget {
                   child: Column(
                     children: [
                       _Control(
-                        number: page,
+                        number: page.state,
                       ),
                       SizedBox(
                         height: 16,
@@ -125,7 +125,9 @@ class _Control extends StatelessWidget {
         ),
         ControlButton(
           icon: CupertinoIcons.chevron_right,
-          onTap: () => {},
+          onTap: () {
+            context.read(pageProvider).state++;
+          },
         ),
       ],
     );
@@ -154,7 +156,10 @@ class _Header extends StatelessWidget {
               CupertinoIcons.chevron_left,
               color: Colors.white,
             ),
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              context.read(pageProvider).state = 1;
+              Navigator.of(context).pop();
+            },
           ),
           Text(
             "$name",

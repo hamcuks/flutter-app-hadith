@@ -35,6 +35,10 @@ class APIRepo {
     try {
       if (res.statusCode == 200) {
         var result = json.decode(res.body)["data"];
+
+        if (!result['contents']) {
+          throw Error();
+        }
         return DetailHadithModel.fromJson(result);
       } else {
         throw Exception("Gagal memuat data. Silahkan restart aplikasi.");
