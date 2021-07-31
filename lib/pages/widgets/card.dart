@@ -13,7 +13,10 @@ class CardHadith extends StatelessWidget {
     return InkWell(
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (builder) => DetailHadithPage(),
+          builder: (builder) => DetailHadithPage(
+            hadithId: data!.id,
+            pageNum: 1,
+          ),
         ),
       ),
       child: Container(
@@ -36,14 +39,14 @@ class CardHadith extends StatelessWidget {
               height: 20,
             ),
             Text(
-              data!.name!,
+              data!.name,
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 10,
             ),
             Text(
-              "Dengan Jumlah ${data!.available!} Hadith",
+              "Dengan Jumlah ${data!.available} Hadith",
               style: TextStyle(fontSize: 16),
             )
           ],

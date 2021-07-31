@@ -2,65 +2,96 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hadith_app/iconsax_icons.dart';
 import 'package:flutter_hadith_app/pages/widgets/controlButton.dart';
+import 'package:flutter_hadith_app/provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DetailHadithPage extends StatelessWidget {
-  const DetailHadithPage({Key? key}) : super(key: key);
+final pageProvider = Provider<int>((_) => 1);
+
+class DetailHadithPage extends ConsumerWidget {
+  const DetailHadithPage({
+    Key? key,
+    required this.hadithId,
+    required this.pageNum,
+  }) : super(key: key);
+
+  final String hadithId;
+  final int pageNum;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, watch) {
+    final detailHadith = watch(
+      detailHadithData(
+        DetailHadithParams(hadithId: hadithId, page: pageNum),
+      ),
+    );
+    final page = watch(pageProvider);
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            _Header(),
-            Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                children: [
-                  _Control(),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(16),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        width: 1.5,
-                        color: Color(0xFF1A645B),
+        child: SingleChildScrollView(
+          child: detailHadith.when(
+            data: (data) => Column(
+              children: [
+                _Header(
+                  name: data.name,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Column(
+                    children: [
+                      _Control(
+                        number: page,
                       ),
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          "Arabic Tes 123456789101112131415",
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontFamily: "Serif",
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(16),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            width: 1.5,
+                            color: Color(0xFF1A645B),
                           ),
-                          textAlign: TextAlign.right,
                         ),
-                        Divider(
-                          height: 50,
-                          thickness: 1.5,
-                          color: Color(0xFF1A645B),
+                        child: Column(
+                          children: [
+                            Text(
+                              "${data.contents?.arab}",
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontFamily: "Serif",
+                              ),
+                              textAlign: TextAlign.right,
+                            ),
+                            Divider(
+                              height: 50,
+                              thickness: 1.5,
+                              color: Color(0xFF1A645B),
+                            ),
+                            Text(
+                              "${data.contents?.id}",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontFamily: "Serif",
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                          ],
                         ),
-                        Text(
-                          "IDN",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: "Serif",
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            )
-          ],
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+            loading: () => Center(
+              child: CircularProgressIndicator(),
+            ),
+            error: (e, s) => Center(
+              child: Text('$e'),
+            ),
+          ),
         ),
       ),
     );
@@ -70,7 +101,10 @@ class DetailHadithPage extends StatelessWidget {
 class _Control extends StatelessWidget {
   const _Control({
     Key? key,
+    required this.number,
   }) : super(key: key);
+
+  final int number;
 
   @override
   Widget build(BuildContext context) {
@@ -80,9 +114,10 @@ class _Control extends StatelessWidget {
       children: [
         ControlButton(
           icon: CupertinoIcons.chevron_left,
+          onTap: () => print(number - 1),
         ),
         Text(
-          "No. 1",
+          "No. $number",
           style: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -90,6 +125,7 @@ class _Control extends StatelessWidget {
         ),
         ControlButton(
           icon: CupertinoIcons.chevron_right,
+          onTap: () => {},
         ),
       ],
     );
@@ -99,7 +135,10 @@ class _Control extends StatelessWidget {
 class _Header extends StatelessWidget {
   const _Header({
     Key? key,
+    this.name,
   }) : super(key: key);
+
+  final String? name;
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +157,7 @@ class _Header extends StatelessWidget {
             onPressed: () => Navigator.of(context).pop(),
           ),
           Text(
-            "H.R. Malik",
+            "$name",
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
