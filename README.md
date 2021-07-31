@@ -1,16 +1,33 @@
-# flutter_hadith_app
+# Kumpulan Hadith
 
-A new Flutter project.
+Merupakan aplikasi yang menyediakan kumpulan hadith dari beberapa perawi. Aplikasi ini dibagun menggunakan Framework Flutter
 
-## Getting Started
+### Dart Package
 
-This project is a starting point for a Flutter application.
+- quatable: ^2.0.3
+- flutter_riverpod: ^0.14.0+3
+- http: ^0.13.3
 
-A few resources to get you started if this is your first Flutter project:
+### Font Icon
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Iconsax by: https://iconsax.io/
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Design
+
+Referensi design by Naima Zulfa - https://www.figma.com/file/GWyYqagCo5AYgCsJXrJiPg/WebHadits?node-id=0%3A1
+
+### API Hadith
+
+Rest API: https://api.hadith.sutanlab.id/books/
+
+### Todos
+
+<input type="checkbox" checked>Home & Detail Page</input> <br>
+<input type="checkbox">Control Page (Next/Previous)</input> <br>
+<input type="checkbox">Search Hadith by Number</input> <br>
+<input type="checkbox">Dark Mode</input> <br>
+
+### Screenshoot
+
+<img src="ss/home.jpeg" width="200"/>
+<img src="ss/detail.jpeg" width="200"/>
