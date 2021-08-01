@@ -23,7 +23,7 @@ Rest API: https://api.hadith.sutanlab.id/books/
 ### Todos
 
 - [x] Home & Detail Page
-- [ ] Control Page (Next/Previous)
+- [x] Control Page (Next/Previous)
 - [ ] Search Hadith by Number
 - [ ] Dark Mode
 
