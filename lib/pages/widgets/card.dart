@@ -15,6 +15,7 @@ class CardHadith extends StatelessWidget {
         MaterialPageRoute(
           builder: (builder) => DetailHadithPage(
             hadithId: data!.id,
+            hadithName: data!.name,
             pageNum: 1,
           ),
         ),

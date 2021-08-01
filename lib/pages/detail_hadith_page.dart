@@ -14,9 +14,11 @@ class DetailHadithPage extends ConsumerWidget {
     Key? key,
     required this.hadithId,
     required this.pageNum,
+    required this.hadithName,
   }) : super(key: key);
 
   final String hadithId;
+  final String hadithName;
   final int pageNum;
 
   @override
@@ -30,13 +32,13 @@ class DetailHadithPage extends ConsumerWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: detailHadith.when(
-            data: (data) => Column(
-              children: [
-                _Header(
-                  name: data.name,
-                ),
-                Padding(
+          child: Column(
+            children: [
+              _Header(
+                name: hadithName,
+              ),
+              detailHadith.when(
+                data: (data) => Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
@@ -85,17 +87,15 @@ class DetailHadithPage extends ConsumerWidget {
                       )
                     ],
                   ),
-                )
-              ],
-            ),
-            loading: () => Center(
-              child: LoadLottieAnim(
-                fileName: 'loading',
-              ),
-            ),
-            error: (e, s) => Center(
-              child: Text('$e'),
-            ),
+                ),
+                loading: () => Center(
+                  child: LoadLottieAnim(fileName: 'loading'),
+                ),
+                error: (e, s) => Center(
+                  child: Text('$e'),
+                ),
+              )
+            ],
           ),
         ),
       ),
