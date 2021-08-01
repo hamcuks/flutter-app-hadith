@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hadith_app/iconsax_icons.dart';
 import 'package:flutter_hadith_app/pages/widgets/card.dart';
+import 'package:flutter_hadith_app/pages/widgets/load_lottie_animation.dart';
 import 'package:flutter_hadith_app/provider/provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,15 +18,6 @@ class HomePage extends ConsumerWidget {
         child: Column(
           children: [
             _Header(),
-            // Center(
-            //   child: hadiths.when(
-            //     data: (data) {
-            //       print(data!.data!.length);
-            //     },
-            //     loading: () => CircularProgressIndicator(),
-            //     error: (e, s) => Text('$e'),
-            //   ),
-            // ),
             Flexible(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -39,7 +32,9 @@ class HomePage extends ConsumerWidget {
                     );
                   },
                   loading: () => Center(
-                    child: CircularProgressIndicator(),
+                    child: LoadLottieAnim(
+                      fileName: 'loading',
+                    ),
                   ),
                   error: (e, s) => Center(
                     child: Text('$e'),

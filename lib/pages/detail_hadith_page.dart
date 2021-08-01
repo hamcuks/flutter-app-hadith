@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hadith_app/iconsax_icons.dart';
 import 'package:flutter_hadith_app/pages/widgets/controlButton.dart';
-import 'package:flutter_hadith_app/provider/detai_hadith_provider.dart';
+import 'package:flutter_hadith_app/pages/widgets/load_lottie_animation.dart';
+import 'package:flutter_hadith_app/provider/detail_hadith_provider.dart';
 import 'package:flutter_hadith_app/provider/provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -88,7 +89,9 @@ class DetailHadithPage extends ConsumerWidget {
               ],
             ),
             loading: () => Center(
-              child: CircularProgressIndicator(),
+              child: LoadLottieAnim(
+                fileName: 'loading',
+              ),
             ),
             error: (e, s) => Center(
               child: Text('$e'),
