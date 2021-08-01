@@ -36,7 +36,7 @@ class DetailHadithPage extends ConsumerWidget {
                   name: data.name,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(24),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
                       _Control(
@@ -75,6 +75,7 @@ class DetailHadithPage extends ConsumerWidget {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontFamily: "Serif",
+                                height: 1.6,
                               ),
                               textAlign: TextAlign.left,
                             ),
@@ -114,9 +115,9 @@ class _Control extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         ControlButton(
-          icon: CupertinoIcons.chevron_left,
-          onTap: () => print(number - 1),
-        ),
+            icon: CupertinoIcons.chevron_left,
+            onPressed: () =>
+                number <= 1 ? null : context.read(pageProvider).state--),
         Text(
           "No. $number",
           style: TextStyle(
@@ -126,7 +127,7 @@ class _Control extends StatelessWidget {
         ),
         ControlButton(
           icon: CupertinoIcons.chevron_right,
-          onTap: () {
+          onPressed: () {
             context.read(pageProvider).state++;
           },
         ),
