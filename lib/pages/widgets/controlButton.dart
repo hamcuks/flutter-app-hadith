@@ -4,13 +4,11 @@ class ControlButton extends StatelessWidget {
   const ControlButton({
     Key? key,
     required this.icon,
-    required this.onTap,
-    required this.page,
+    required this.onPressed,
   }) : super(key: key);
 
   final IconData icon;
-  final int page;
-  final VoidCallback onTap;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +23,7 @@ class ControlButton extends StatelessWidget {
         ),
       ),
       child: TextButton(
-        onPressed: page == 1
-            ? null
-            : page >= 1
-                ? onTap
-                : null,
+        onPressed: onPressed,
         child: Icon(
           icon,
           color: Color(0xFF1A645B),
