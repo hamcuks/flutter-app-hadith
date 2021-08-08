@@ -112,11 +112,15 @@ class DetailHadithPage extends ConsumerWidget {
                         );
                       },
                       loading: () => Center(
-                        child: LoadLottieAnim(fileName: 'loading'),
+                        child: LoadLottieAnim(
+                          fileName: 'loading',
+                          width: 150,
+                        ),
                       ),
                       error: (e, s) => Center(
                         child: LoadLottieAnim(
                           fileName: 'not_found',
+                          width: 350,
                         ),
                       ),
                     )
