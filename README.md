@@ -24,8 +24,7 @@ Rest API: https://api.hadith.sutanlab.id/books/
 
 - [x] Home & Detail Page
 - [x] Control Page (Next/Previous)
-- [ ] Search Hadith by Number
-- [ ] Dark Mode
+- [x] Search Hadith by Number
 
 ### Screenshoot
 
