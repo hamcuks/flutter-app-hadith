@@ -29,6 +29,9 @@ class DetailHadithPage extends ConsumerWidget {
         DetailHadithParams(hadithId: hadithId, page: page.state),
       ),
     );
+
+    TextEditingController _searchController = TextEditingController();
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -37,62 +40,87 @@ class DetailHadithPage extends ConsumerWidget {
               _Header(
                 name: hadithName,
               ),
-              detailHadith.when(
-                data: (data) => Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-                      _Control(
-                        number: page.state,
+              Container(
+                padding: EdgeInsets.all(16),
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  controller: _searchController,
+                  onSubmitted: (val) {
+                    context.read(pageProvider).state = int.parse(val);
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Masukkan nomor hadith',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        width: 1.5,
+                        color: Color(0xFF1A645B),
                       ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(16),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            width: 1.5,
-                            color: Color(0xFF1A645B),
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              "${data.contents?.arab}",
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontFamily: "Serif",
-                              ),
-                              textAlign: TextAlign.right,
-                            ),
-                            Divider(
-                              height: 50,
-                              thickness: 1.5,
-                              color: Color(0xFF1A645B),
-                            ),
-                            Text(
-                              "${data.contents?.id}",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontFamily: "Serif",
-                                height: 1.6,
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
+                    ),
+                    suffixIcon: Icon(CupertinoIcons.search),
                   ),
                 ),
-                loading: () => Center(
-                  child: LoadLottieAnim(fileName: 'loading'),
-                ),
-                error: (e, s) => Center(
-                  child: Text('$e'),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    _Control(
+                      number: page.state,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    detailHadith.when(
+                      data: (data) {
+                        return Container(
+                          padding: EdgeInsets.all(16),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              width: 1.5,
+                              color: Color(0xFF1A645B),
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              Text(
+                                "${data.contents?.arab}",
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontFamily: "Serif",
+                                ),
+                                textAlign: TextAlign.right,
+                              ),
+                              Divider(
+                                height: 50,
+                                thickness: 1.5,
+                                color: Color(0xFF1A645B),
+                              ),
+                              Text(
+                                "${data.contents?.id}",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontFamily: "Serif",
+                                  height: 1.6,
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      loading: () => Center(
+                        child: LoadLottieAnim(fileName: 'loading'),
+                      ),
+                      error: (e, s) => Center(
+                        child: LoadLottieAnim(
+                          fileName: 'not_found',
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               )
             ],

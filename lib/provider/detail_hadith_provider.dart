@@ -15,7 +15,7 @@ Future<DetailHadithModel> fetchDetailHadith({String? id, int page = 1}) async {
       var result = json.decode(res.body)["data"];
 
       if (result['contents'] == null) {
-        throw Exception("Tidak ada data");
+        throw "Tidak ada data";
       }
       return DetailHadithModel.fromJson(result);
     } else {
@@ -35,8 +35,6 @@ class DetailHadithParams extends Equatable {
   @override
   List<Object> get props => [hadithId, page];
 }
-
-//final detailHadithProvider = Provider((ref) => fetchDetailHadith(id: ));
 
 final detailHadithData =
     FutureProvider.family<DetailHadithModel, DetailHadithParams>(
